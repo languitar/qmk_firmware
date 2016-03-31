@@ -1,14 +1,15 @@
 # languitar layout
 
-A modification of the default layout. The following things have changed
+A modification of the default layout. The following things have changed:
 
-* Modifier keys closer to a usual keyboard so that you still are able to type on those
-* No fancy toggling for modifier keys as I couldn't get used to the delay
+* Modifier keys closer to a usual keyboard so that you still are able to type on those.
+* No fancy toggling for modifier keys as I couldn't get used to the delay.
 * Less fancy combination modifier keys. I never used them.
 * vim-like arrow keys on the right hand and in the media layer at the usual `hjkl` location.
-* Consistent layer switching on the pinkies so that all layers are easily accessible and usable during normal typing
-* Some rearranging on the number block to be more consistent with usual keyboards
-* A smiley and umlauts (German) layer based on Linux compose capability
+* Consistent layer switching on the pinkies so that all layers are easily accessible and usable during normal typing.
+* Some rearranging on the number block to be more consistent with usual keyboards.
+* A smiley and umlauts (German) layer based on Linux compose capability. It assumes an English keyboard layout being configured on the system.
+* Some special-purpose keys to handle my tiling window manager setup.
 
 ## Layer 0: Default
 
@@ -24,13 +25,13 @@ A modification of the default layout. The following things have changed
 `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
   | Ctrl |  [   |   ]  | LGui | Alt  |                                       | Left | Down |  Up  |Right | ~L1  |
   `----------------------------------'                                       `----------------------------------'
-                                       ,-------------.       ,---------------.
-                                       | Home | End  |       | PgDn |  PgUp  |
-                                ,------|------|------|       |------+--------+------.
-                                |      |      | App  |       |PrtSc |        |      |
-                                | Space|Backsp|------|       |------|  Tab   |Enter |
-                                |      |ace   |Enter |       | Del  |        |      |
-                                `--------------------'       `----------------------'
+                                       ,-------------.       ,-------------.
+                                       | Home | End  |       | PgDn | PgUp |
+                                ,------|------|------|       |------+------+------.
+                                |      |      | App  |       |PrtSc |      |      |
+                                | Space|Backsp|------|       |------| Tab  |Enter |
+                                |      |ace   |Enter |       | Del  |      |      |
+                                `--------------------'       `--------------------'
 ```
 
 ## Layer 1: Code and Numbers
