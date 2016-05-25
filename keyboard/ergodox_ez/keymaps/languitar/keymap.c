@@ -1,6 +1,7 @@
 #include "ergodox_ez.h"
 #include "debug.h"
 #include "action_layer.h"
+#include "led.h"
 
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
@@ -40,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              LSFT(KC_INS),KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
              KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT(SYMB,KC_SLSH), KC_RSFT,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_RCTRL,
+                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
              KC_PGDN,   KC_PGUP,
              KC_PSCREEN,
              KC_DEL,    KC_TAB,  KC_ENT
@@ -209,7 +210,6 @@ void * matrix_scan_user(void) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
     switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
             ergodox_right_led_1_on();
             break;
@@ -217,11 +217,15 @@ void * matrix_scan_user(void) {
             ergodox_right_led_2_on();
             break;
         case 3:
-            ergodox_right_led_3_on();
+            ergodox_right_led_1_on();
+            ergodox_right_led_2_on();
             break;
         default:
             // none
             break;
+    }
+    if (host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK)) {
+        ergodox_right_led_3_on();
     }
 
 };
