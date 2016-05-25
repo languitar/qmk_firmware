@@ -30,7 +30,7 @@ A modification of the default layout. The following things have changed:
                                 ,------|------|------|       |------+------+------.
                                 |      |      | App  |       |PrtSc |      |      |
                                 | Space|Backsp|------|       |------| Tab  |Enter |
-                                |      |ace   |Enter |       | Del  |      |      |
+                                |      |ace   | Del  |       | Del  |      |      |
                                 `--------------------'       `--------------------'
 ```
 
