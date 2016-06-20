@@ -23,6 +23,33 @@
 #define SM_LAUGH 50
 #define SM_SAD 51
 
+#define LT_CUSTOM 0x7100
+
+bool layer_interrupted = false;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+      case LT_CUSTOM: {
+      if (record->event.pressed) {
+        layer_interrupted = false;
+        layer_on(1);
+      } else {
+        if (!layer_interrupted) {
+          register_code(KC_SLSH);
+          unregister_code(KC_SLSH);
+        }
+        layer_off(1);
+      }
+      return false;
+      break;
+    }
+    default: {
+      layer_interrupted = true;
+      break;
+    }
+    }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
@@ -40,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
              LSFT(KC_INS),KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
-             KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT(SYMB,KC_SLSH), KC_RSFT,
+             KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT_CUSTOM, KC_RSFT,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
              KC_PGDN,   KC_PGUP,
              KC_PSCREEN,
