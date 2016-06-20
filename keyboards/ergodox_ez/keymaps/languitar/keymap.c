@@ -28,6 +28,58 @@
 #define SM_LAUGH 50
 #define SM_SAD 51
 
+#define LT_L1_LEFT 0x7100
+#define LT_L2_LEFT 0x7101
+#define LT_L3_LEFT 0x7102
+#define LT_L1_RIGHT 0x7110
+#define LT_L2_RIGHT 0x7111
+#define LT_L3_RIGHT 0x7112
+
+bool layer_interrupted = false;
+static uint16_t layer_timer;
+
+void lt_custom(keyrecord_t *record, uint8_t layer, uint8_t code) {
+  if (record->event.pressed) {
+    layer_timer = timer_read();
+    layer_interrupted = false;
+    layer_on(layer);
+  } else {
+    if (!layer_interrupted && timer_elapsed(layer_timer) < 500) {
+      register_code(code);
+      unregister_code(code);
+    }
+    layer_off(layer);
+  }
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+      case LT_L1_LEFT:
+        lt_custom(record, SYMB, KC_Z);
+        return false;
+      case LT_L2_LEFT:
+        lt_custom(record, MDIA, KC_A);
+        return false;
+      case LT_L3_LEFT:
+        lt_custom(record, UMLS, KC_Q);
+        return false;
+      case LT_L1_RIGHT:
+        lt_custom(record, SYMB, KC_SLSH);
+        return false;
+      case LT_L2_RIGHT:
+        lt_custom(record, MDIA, KC_SCLN);
+        return false;
+      case LT_L3_RIGHT:
+        lt_custom(record, UMLS, KC_P);
+        return false;
+      default:
+        if (!record->event.pressed) {
+          layer_interrupted = true;
+        }
+        break;
+    }
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
@@ -45,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
              M(CPYPST),   KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
-             KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT(SYMB,KC_SLSH), KC_RSFT,
+             KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
              KC_PGDN,   KC_PGUP,
              KC_PSCREEN,
