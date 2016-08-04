@@ -17,6 +17,8 @@
 #define L2CTRL 20
 #define L2CTRLSFT 21
 
+#define CPYPST 30
+
 #define SM_SMILE 44
 #define SM_SMIRK 45
 #define SM_FROWN 46
@@ -41,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_SPC,KC_BSPC,KC_DEL,
         // right hand
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
-             LSFT(KC_INS),KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
+             M(CPYPST),   KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
              KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT(SYMB,KC_SLSH), KC_RSFT,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
@@ -117,6 +119,8 @@ const uint16_t PROGMEM fn_actions[] = {
     [2] = ACTION_LAYER_TAP_TOGGLE(MDIA),               // FN2 - Momentary Layer 2 (Media)
     [3] = ACTION_LAYER_TAP_TOGGLE(UMLS)                // FN3 - Momentary Layer 3 (Umlauts)
 };
+
+static uint16_t cpypst_timer;
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
@@ -212,6 +216,17 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             unregister_code(KC_LSFT);
             unregister_code(KC_LCTL);
             layer_off(MDIA);
+          }
+          break;
+        case CPYPST:
+          if (record->event.pressed) {
+            cpypst_timer = timer_read();
+          } else {
+            if (timer_elapsed(cpypst_timer) > 150) {
+              return MACRO(D(LCTRL), T(INS), U(LCTRL), END);
+            } else {
+              return MACRO(D(LSFT), T(INS), U(LSFT), END);
+            }
           }
           break;
       }

@@ -18,8 +18,8 @@ A modification of the default layout. The following things have changed:
 ,--------------------------------------------------.           ,--------------------------------------------------.
 |  Grv   |   1  |   2  |   3  |   4  |   5  | MENU |           | TERM |   6  |   7  |   8  |   9  |   0  | Backsp |
 |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-| Tab    |Q / L3|   W  |   E  |   R  |   T  | ~L1  |           |PASTE |   Y  |   U  |   I  |   O  |P / L3|   \    |
-|--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+| Tab    |Q / L3|   W  |   E  |   R  |   T  | ~L1  |           |COPY/ |   Y  |   U  |   I  |   O  |P / L3|   \    |
+|--------+------+------+------+------+------|      |           |PASTE |------+------+------+------+------+--------|
 |Esc/Ctrl|A / L2|   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|' / Ctrl|
 |--------+------+------+------+------+------|  =   |           |  -   |------+------+------+------+------+--------|
 | LShift |Z / L1|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |/ / L1| RShift |
@@ -35,6 +35,8 @@ A modification of the default layout. The following things have changed:
                                 `--------------------'       `--------------------'
 ```
 
+* `COPY/PASTE`: Long press: copy, short press paste (using Ctrl/Shift + Insert)
+* `TERM`: `LGui` + Enter
 * `L2CTL`: Layer 2 + Ctrl
 * `L2CTLSH`: Layer 2 + Ctrl + Shift
 
