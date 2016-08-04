@@ -14,6 +14,9 @@
 #define UMLSZ 13
 #define UMLEU 14
 
+#define L2CTRL 20
+#define L2CTRLSFT 21
+
 #define SM_SMILE 44
 #define SM_SMIRK 45
 #define SM_FROWN 46
@@ -28,14 +31,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   LGUI(KC_SPC),
-        KC_TAB,         LT(UMLS,KC_Q),KC_W,   KC_E,   KC_R,   KC_T,   KC_FN1,
-        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_S,   KC_D,   KC_F,   KC_G,
-        KC_LSFT,        LT(SYMB,KC_Z),KC_X,   KC_C,   KC_V,   KC_B,   KC_EQL,
-        KC_LCTRL,       KC_LBRC,      KC_RBRC,KC_LALT,KC_LGUI,
-                                                      KC_HOME,KC_END,
-                                                              KC_APP,
-                                               KC_SPC,KC_BSPC,KC_DEL,
+        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,   KC_5,   LGUI(KC_SPC),
+        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_E,   KC_R,   KC_T,   KC_FN1,
+        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_S,        KC_D,   KC_F,   KC_G,
+        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,   KC_B,   KC_EQL,
+        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LALT,KC_LGUI,
+                                                           KC_HOME,KC_END,
+                                                                   KC_APP,
+                                                    KC_SPC,KC_BSPC,KC_DEL,
         // right hand
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
              LSFT(KC_INS),KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
@@ -189,6 +192,26 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case SM_FROWN:
           if (record->event.pressed) {
             return MACRO(D(LSFT), T(SCLN), U(LSFT), T(MINS), T(LBRC), END);
+          }
+          break;
+        case L2CTRL:
+          if (record->event.pressed) {
+            layer_on(MDIA);
+            register_code(KC_LCTL);
+          } else {
+            unregister_code(KC_LCTL);
+            layer_off(MDIA);
+          }
+          break;
+        case L2CTRLSFT:
+          if (record->event.pressed) {
+            layer_on(MDIA);
+            register_code(KC_LCTL);
+            register_code(KC_LSFT);
+          } else {
+            unregister_code(KC_LSFT);
+            unregister_code(KC_LCTL);
+            layer_off(MDIA);
           }
           break;
       }

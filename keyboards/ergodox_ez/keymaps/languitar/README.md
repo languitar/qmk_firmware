@@ -10,6 +10,7 @@ A modification of the default layout. The following things have changed:
 * Some rearranging on the number block to be more consistent with usual keyboards.
 * A smiley and umlauts (German) layer based on Linux compose capability. It assumes an English keyboard layout being configured on the system.
 * Some special-purpose keys to handle my tiling window manager setup.
+* Combined L2 + Ctrl and optionally Shift for word-wise navigation with Vim bindings in any GUI program.
 
 ## Layer 0: Default
 
@@ -23,7 +24,7 @@ A modification of the default layout. The following things have changed:
 |--------+------+------+------+------+------|  =   |           |  -   |------+------+------+------+------+--------|
 | LShift |Z / L1|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |/ / L1| RShift |
 `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-  | Ctrl |  [   |   ]  | Alt  | LGui |                                       | Left | Down |  Up  |Right | Caps |
+  | Ctrl |L2CTL |L2CTSH| Alt  | LGui |                                       | Left | Down |  Up  |Right | Caps |
   `----------------------------------'                                       `----------------------------------'
                                        ,-------------.       ,-------------.
                                        | Home | End  |       | PgDn | PgUp |
@@ -33,6 +34,9 @@ A modification of the default layout. The following things have changed:
                                 |      |ace   | Del  |       | Del  |      |      |
                                 `--------------------'       `--------------------'
 ```
+
+* `L2CTL`: Layer 2 + Ctrl
+* `L2CTLSH`: Layer 2 + Ctrl + Shift
 
 ## Layer 1: Code and Numbers
 
