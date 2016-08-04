@@ -126,13 +126,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
       switch(id) {
-        case 0:
-          if (record->event.pressed) {
-            register_code(KC_RSFT);
-          } else {
-            unregister_code(KC_RSFT);
-          }
-          break;
         case UMLAE:
           if (record->event.pressed) {
             return MACRO(T(APP), D(LSFT), T(QUOT), U(LSFT), T(A), END);
