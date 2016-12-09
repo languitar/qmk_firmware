@@ -18,16 +18,16 @@ A modification of the default layout. The following things have changed:
 ,--------------------------------------------------.           ,--------------------------------------------------.
 |  Grv   |   1  |   2  |   3  |   4  |   5  | MENU |           | TERM |   6  |   7  |   8  |   9  |   0  | Backsp |
 |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-| Tab    |Q / L3|   W  |   E  |   R  |   T  | ~L1  |           |COPY/ |   Y  |   U  |   I  |   O  |P / L3|   \    |
-|--------+------+------+------+------+------|      |           |PASTE |------+------+------+------+------+--------|
+| Tab    |Q / L3|   W  |   E  |   R  |   T  |  +   |           |  &   |   Y  |   U  |   I  |   O  |P / L3|   \    |
+|--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
 |Esc/Ctrl|A / L2|   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |; / L2|' / Ctrl|
 |--------+------+------+------+------+------|  =   |           |  -   |------+------+------+------+------+--------|
 | LShift |Z / L1|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |/ / L1| RShift |
 `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-  | Ctrl |L2CTL |L2CTSH| Alt  | LGui |                                       | Left | Down |  Up  |Right | Caps |
+  | Ctrl |L2CTL |L2CTSH| LGui | Alt  |                                       | Left | Down |  Up  |Right | Caps |
   `----------------------------------'                                       `----------------------------------'
                                        ,-------------.       ,-------------.
-                                       | Home | End  |       | PgDn | PgUp |
+                                       | CpPs |Enter |       |  L1  |  L2  |
                                 ,------|------|------|       |------+------+------.
                                 |      |      | App  |       |PrtSc |      |      |
                                 | Space|Backsp|------|       |------| Tab  |Enter |
@@ -35,7 +35,8 @@ A modification of the default layout. The following things have changed:
                                 `--------------------'       `--------------------'
 ```
 
-* `COPY/PASTE`: Long press: copy, short press paste (using Ctrl/Shift + Insert)
+* `CpPs`: Long press: copy, short press paste (using Ctrl/Shift + Insert)
+* `MENU`: Ctrl + Space
 * `TERM`: `LGui` + Enter
 * `L2CTL`: Layer 2 + Ctrl
 * `L2CTLSH`: Layer 2 + Ctrl + Shift

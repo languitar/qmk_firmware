@@ -85,21 +85,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,   KC_5,   LGUI(KC_SPC),
-        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_E,   KC_R,   KC_T,   KC_FN1,
-        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_S,        KC_D,   KC_F,   KC_G,
-        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,   KC_B,   KC_EQL,
-        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LALT,KC_LGUI,
-                                                           KC_HOME,KC_END,
-                                                                   KC_APP,
-                                                    KC_SPC,KC_BSPC,KC_DEL,
+        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,     KC_5,   LGUI(KC_SPC),
+        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_E,   KC_R,     KC_T,   KC_PLUS,
+        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_S,        KC_D,   KC_F,     KC_G,
+        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,     KC_B,   KC_EQL,
+        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LGUI,KC_LALT,
+                                                           M(CPYPST),KC_ENT,
+                                                                     KC_APP,
+                                                    KC_SPC,KC_BSPC,  KC_DEL,
         // right hand
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
-             M(CPYPST),   KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
+             LSFT(KC_7),  KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
              KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
-             KC_PGDN,   KC_PGUP,
+             KC_FN1,    KC_FN2,
              KC_PSCREEN,
              KC_DEL,    KC_TAB,  KC_ENT
     ),
