@@ -293,13 +293,13 @@ void matrix_scan_user(void) {
     ergodox_right_led_2_off();
     ergodox_right_led_3_off();
     switch (layer) {
-        case 1:
+        case SYMB:
             ergodox_right_led_1_on();
             break;
-        case 2:
+        case MDIA:
             ergodox_right_led_2_on();
             break;
-        case 3:
+        case UMLS:
             ergodox_right_led_1_on();
             ergodox_right_led_2_on();
             break;
