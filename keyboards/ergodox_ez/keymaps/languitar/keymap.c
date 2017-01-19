@@ -4,9 +4,10 @@
 #include "led.h"
 
 #define BASE 0 // default layer
-#define SYMB 1 // symbols
-#define MDIA 2 // media keys
-#define UMLS 3 // umlauts
+#define COLE 1 // default layer
+#define SYMB 2 // symbols
+#define MDIA 3 // media keys
+#define UMLS 4 // umlauts
 
 #define UMLAE 10
 #define UMLOE 11
@@ -91,13 +92,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,     KC_B,   KC_EQL,
         KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LGUI,KC_LALT,
                                                            M(CPYPST),KC_ENT,
-                                                                     KC_APP,
+                                                                     TG(COLE),
                                                     KC_SPC,KC_BSPC,  KC_DEL,
         // right hand
              LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
              LSFT(KC_7),  KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
                           KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
              KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
+                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
+             KC_FN1,    KC_FN2,
+             KC_PSCREEN,
+             KC_DEL,    KC_TAB,  KC_ENT
+    ),
+[COLE] = KEYMAP(  // COLEMAK
+        // left hand
+        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,     KC_5,   LGUI(KC_SPC),
+        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_F,   KC_P,     KC_G,   KC_PLUS,
+        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_R,        KC_S,   KC_T,     KC_D,
+        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,     KC_B,   KC_EQL,
+        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LGUI,KC_LALT,
+                                                           M(CPYPST),KC_ENT,
+                                                                     KC_TRNS,
+                                                    KC_SPC,KC_BSPC,  KC_DEL,
+        // right hand
+             LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
+             LSFT(KC_7),  KC_J,   KC_L,   KC_U,   KC_Y,   LT(UMLS, KC_SCLN),KC_BSLS,
+                          KC_H,   KC_N,   KC_E,   KC_I,   LT(MDIA, KC_O),   CTL_T(KC_QUOT),
+             KC_MINS,     KC_K,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
              KC_FN1,    KC_FN2,
              KC_PSCREEN,
