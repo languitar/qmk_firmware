@@ -4,7 +4,7 @@
 #include "led.h"
 
 #define BASE 0 // default layer
-#define COLE 1 // default layer
+#define COLE 1 // colemak layer
 #define SYMB 2 // symbols
 #define MDIA 3 // media keys
 #define UMLS 4 // umlauts
@@ -29,108 +29,56 @@
 #define SM_LAUGH 50
 #define SM_SAD 51
 
-#define LT_L1_LEFT 0x7100
-#define LT_L2_LEFT 0x7101
-#define LT_L3_LEFT 0x7102
-#define LT_L1_RIGHT 0x7110
-#define LT_L2_RIGHT 0x7111
-#define LT_L3_RIGHT 0x7112
-
-bool layer_interrupted = false;
-static uint16_t layer_timer;
-
-void lt_custom(keyrecord_t *record, uint8_t layer, uint8_t code) {
-  if (record->event.pressed) {
-    layer_timer = timer_read();
-    layer_interrupted = false;
-    layer_on(layer);
-  } else {
-    if (!layer_interrupted && timer_elapsed(layer_timer) < 500) {
-      register_code(code);
-      unregister_code(code);
-    }
-    layer_off(layer);
-  }
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-      case LT_L1_LEFT:
-        lt_custom(record, SYMB, KC_Z);
-        return false;
-      case LT_L2_LEFT:
-        lt_custom(record, MDIA, KC_A);
-        return false;
-      case LT_L3_LEFT:
-        lt_custom(record, UMLS, KC_Q);
-        return false;
-      case LT_L1_RIGHT:
-        lt_custom(record, SYMB, KC_SLSH);
-        return false;
-      case LT_L2_RIGHT:
-        lt_custom(record, MDIA, KC_SCLN);
-        return false;
-      case LT_L3_RIGHT:
-        lt_custom(record, UMLS, KC_P);
-        return false;
-      default:
-        if (!record->event.pressed) {
-          layer_interrupted = true;
-        }
-        break;
-    }
-}
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,     KC_5,   LGUI(KC_SPC),
-        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_E,   KC_R,     KC_T,   KC_PLUS,
-        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_S,        KC_D,   KC_F,     KC_G,
-        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,     KC_B,   KC_EQL,
-        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LGUI,KC_LALT,
-                                                           M(CPYPST),KC_ENT,
-                                                                     TG(COLE),
-                                                    KC_SPC,KC_BSPC,  KC_DEL,
+        KC_GRV,        KC_1,   KC_2,   KC_3,    KC_4,      KC_5,     LGUI(KC_SPC),
+        KC_TAB,        KC_Q,   KC_W,   KC_E,    KC_R,      KC_T,     KC_PLUS,
+        CTL_T(KC_ESC), KC_A,   KC_S,   KC_D,    KC_F,      KC_G,
+        KC_LSFT,       KC_Z,   KC_X,   KC_C,    KC_V,      KC_B,     KC_EQL,
+        KC_LCTRL,      KC_FN2, KC_FN1, KC_LGUI, KC_LALT,
+                                                M(CPYPST), KC_ENT,
+                                                           TG(COLE),
+                                       KC_SPC,  KC_BSPC,   KC_DEL,
         // right hand
-             LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
-             LSFT(KC_7),  KC_Y,   KC_U,   KC_I,   KC_O,   LT(UMLS, KC_P),   KC_BSLS,
-                          KC_H,   KC_J,   KC_K,   KC_L,   LT(MDIA, KC_SCLN),CTL_T(KC_QUOT),
-             KC_MINS,     KC_N,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
-             KC_FN1,    KC_FN2,
+             LGUI(KC_ENT), KC_6,    KC_7,   KC_8,    KC_9,   KC_0,    KC_BSPC,
+             LSFT(KC_7),   KC_Y,    KC_U,   KC_I,    KC_O,   KC_P,    KC_BSLS,
+                           KC_H,    KC_J,   KC_K,    KC_L,   KC_SCLN, CTL_T(KC_QUOT),
+             KC_MINS,      KC_N,    KC_M,   KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                                    KC_FN2, KC_FN3,  KC_FN2, KC_FN1,  KC_RCTRL,
+             KC_FN1,       KC_CAPS,
              KC_PSCREEN,
-             KC_DEL,    KC_TAB,  KC_ENT
+             KC_DEL,       KC_TAB,  KC_ENT
     ),
 [COLE] = KEYMAP(  // COLEMAK
         // left hand
-        KC_GRV,         KC_1,         KC_2,        KC_3,   KC_4,     KC_5,   LGUI(KC_SPC),
-        KC_TAB,         LT(UMLS,KC_Q),KC_W,        KC_F,   KC_P,     KC_G,   KC_PLUS,
-        CTL_T(KC_ESC),  LT(MDIA,KC_A),KC_R,        KC_S,   KC_T,     KC_D,
-        KC_LSFT,        LT(SYMB,KC_Z),KC_X,        KC_C,   KC_V,     KC_B,   KC_EQL,
-        KC_LCTRL,       M(L2CTRL),    M(L2CTRLSFT),KC_LGUI,KC_LALT,
-                                                           M(CPYPST),KC_ENT,
-                                                                     KC_TRNS,
-                                                    KC_SPC,KC_BSPC,  KC_DEL,
+        KC_GRV,        KC_1,   KC_2,   KC_3,    KC_4,    KC_5,      LGUI(KC_SPC),
+        KC_TAB,        KC_Q,   KC_W,   KC_F,    KC_P,    KC_G,      KC_PLUS,
+        CTL_T(KC_ESC), KC_A,   KC_R,   KC_S,    KC_T,    KC_D,
+        KC_LSFT,       KC_Z,   KC_X,   KC_C,    KC_V,    KC_B,      KC_EQL,
+        KC_LCTRL,      KC_FN2, KC_FN1, KC_LGUI, KC_LALT,
+                                                         M(CPYPST), KC_ENT,
+                                                                    KC_TRNS,
+                                                KC_SPC,  KC_BSPC,   KC_DEL,
         // right hand
-             LGUI(KC_ENT),KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_BSPC,
-             LSFT(KC_7),  KC_J,   KC_L,   KC_U,   KC_Y,   LT(UMLS, KC_SCLN),KC_BSLS,
-                          KC_H,   KC_N,   KC_E,   KC_I,   LT(MDIA, KC_O),   CTL_T(KC_QUOT),
-             KC_MINS,     KC_K,   KC_M,   KC_COMM,KC_DOT, LT_L1_RIGHT,      KC_RSFT,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_CAPS,
-             KC_FN1,    KC_FN2,
+             LGUI(KC_ENT),KC_6,    KC_7,   KC_8,    KC_9,   KC_0,    KC_BSPC,
+             LSFT(KC_7),  KC_J,    KC_L,   KC_U,    KC_Y,   KC_SCLN, KC_BSLS,
+                          KC_H,    KC_N,   KC_E,    KC_I,   KC_O,    CTL_T(KC_QUOT),
+             KC_MINS,     KC_K,    KC_M,   KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+                                   KC_FN2, KC_FN3,  KC_FN2, KC_FN1,  KC_RCTRL,
+             KC_FN1,      KC_CAPS,
              KC_PSCREEN,
-             KC_DEL,    KC_TAB,  KC_ENT
+             KC_DEL,      KC_TAB,  KC_ENT
     ),
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
        KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_AT,  KC_LCBR,KC_RCBR,KC_PIPE,KC_TRNS,
-       KC_TRNS,KC_TRNS,KC_DLR, KC_LPRN,KC_RPRN,KC_GRV,
-       KC_TRNS,KC_TRNS,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_TRNS,
+       KC_TRNS,KC_EXLM,KC_AT,  KC_LCBR,KC_RCBR,KC_PIPE,KC_TRNS,
+       KC_TRNS,KC_HASH,KC_DLR, KC_LPRN,KC_RPRN,KC_GRV,
+       KC_TRNS,KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
@@ -138,9 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        // right hand
        KC_TRNS, KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
        KC_TRNS, KC_UP,   KC_7,   KC_8,    KC_9,    KC_SLSH, KC_F12,
-                KC_DOWN, KC_4,   KC_5,    KC_6,    KC_ASTR, KC_TRNS,
-       KC_TRNS, KC_AMPR, KC_1,   KC_2,    KC_3,    KC_TRNS, KC_TRNS,
-                         KC_EQL, KC_0,    KC_DOT,  KC_PLUS, KC_MINS,
+                KC_DOWN, KC_4,   KC_5,    KC_6,    KC_ASTR, KC_SLSH,
+       KC_TRNS, KC_AMPR, KC_1,   KC_2,    KC_3,    KC_PLUS, KC_MINS,
+                         KC_EQL, KC_0,    KC_DOT,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
@@ -159,8 +107,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_TRNS, KC_MUTE,
                  KC_LEFT, KC_DOWN, KC_UP  , KC_RGHT, KC_TRNS, KC_MPLY,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MSTP,
-                          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MSTP,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
